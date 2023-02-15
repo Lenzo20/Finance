@@ -1,7 +1,7 @@
 import express from 'express';
 import router from './router/router';
-import { addFin } from './controllers/addFin';
-import { deleteFin } from './controllers/deleteFin';
+import { addFin } from './controllers/debtorBD/addFinDebtor';
+import { deleteFin } from './controllers/debtorBD/deleteFinDebtor';
 
 const app = express();
 
