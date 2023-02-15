@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { debtorBD } from '../../model/debtorBD';
+import { BeadDB } from '../../model/BeadBD';
 
-export async function deleteFin(req: Request, res: Response) {
+export async function deleteFinBead(req: Request, res: Response) {
   const id = req.params.id;
 
-  const fin = await debtorBD.findOne({ _id: id });
+  const fin = await BeadDB.findOne({ _id: id });
 
   if (!fin)
     return res.status(404).json({ msg: 'Arquivo inexistent' });
