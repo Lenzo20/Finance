@@ -1,17 +1,20 @@
 import { Request, Response } from 'express';
-import { FinanceBD } from '../model/FinanceBD';
+import { BeadDB } from '../../model/BeadBD';
 
-export async function addFin(req: Request, res: Response) {
+export async function addFinBead(req: Request, res: Response) {
   try {
-    const { value, name } = req.body;
+    const { value, name, description, dueDate } = req.body;
 
     if (!value)
       return res.status(400).json({ msg: 'value is required' });
 
-    const fin = await FinanceBD.create({ value });
+    const fin = await BeadDB.create({ value, description });
 
     if (name)
       fin.name = name;
+
+    if (dueDate)
+      fin.dueDate = dueDate;
 
     fin.save();
 
