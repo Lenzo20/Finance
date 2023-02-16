@@ -4,12 +4,14 @@ import { debtorBD } from '../../model/debtorBD';
 export async function deleteFinDebtor(req: Request, res: Response) {
   const id = req.params.id;
 
-  const fin = await debtorBD.findOne({ _id: id });
+  if (id) {
+    const fin = await debtorBD.findById(id);
 
-  if (!fin)
-    return res.status(404).json({ msg: 'Arquivo inexistent' });
+    if (!fin)
+      return res.status(404).json({ msg: 'Arquivo inexistent' });
+  }
 
-  fin.delete();
+  await debtorBD.findByIdAndDelete(id);
 
   return res.json({ msg: 'Deletion successful' });
 }

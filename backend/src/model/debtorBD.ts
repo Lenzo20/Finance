@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import { CategoriaDB } from './CategoriaDB';
 
 export const debtorBD = model('debtor',
   new Schema({
@@ -12,6 +13,14 @@ export const debtorBD = model('debtor',
     createdAt: {
       type: Date,
       default: new Date(),
+    },
+    categoria: {
+      type: [{
+        categoriaId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Categoria',
+        }
+      }]
     }
   })
 );

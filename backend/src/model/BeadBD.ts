@@ -2,6 +2,8 @@ import { Schema, model } from 'mongoose';
 
 export const BeadDB = model('Bead',
   new Schema({
+    dueDate: String,
+    name: String,
     description: {
       type: String,
       required: true,
@@ -10,11 +12,17 @@ export const BeadDB = model('Bead',
       type: Number,
       required: true
     },
-    dueDate: String,
-    name: String,
     createdAt: {
       type: Date,
       default: new Date(),
+    },
+    categoria: {
+      type: [{
+        categoriaId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Categoria',
+        }
+      }]
     }
   })
 );

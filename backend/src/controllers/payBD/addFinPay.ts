@@ -3,7 +3,7 @@ import { PayDB } from '../../model/PayBD';
 
 export async function addFinPay(req: Request, res: Response) {
   try {
-    const { value, name, dueDate } = req.body;
+    const { value, name, dueDate, categoria } = req.body;
 
     if (!value)
       return res.status(400).json({ msg: 'value is required' });
@@ -16,11 +16,15 @@ export async function addFinPay(req: Request, res: Response) {
     if (dueDate)
       fin.dueDate = dueDate;
 
+    if (categoria)
+      fin.categoria = categoria;
+
     fin.save();
 
     return res.status(201).json(fin);
   } catch (err) {
     console.error(err);
 
+    return res.sendStatus(404);
   }
 }

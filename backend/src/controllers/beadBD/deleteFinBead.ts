@@ -4,10 +4,14 @@ import { BeadDB } from '../../model/BeadBD';
 export async function deleteFinBead(req: Request, res: Response) {
   const id = req.params.id;
 
-  const fin = await BeadDB.findOne({ _id: id });
+  if (id) {
+    const fin = await BeadDB.findById(id);
 
-  if (!fin)
-    return res.status(404).json({ msg: 'Arquivo inexistent' });
+    if (!fin)
+      return res.json({ msg: 'Categoria inexistent' });
+  }
 
-  fin.delete();
+  await BeadDB.findByIdAndDelete(id);
+
+  return res.json({ msg: 'Deletion successful' });
 }
